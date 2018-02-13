@@ -1,0 +1,29 @@
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="dashboard-homecard">
+  <template>
+    <style>
+      .container{
+        width: 100%;
+        @apply(--layout-horizontal);
+        /*@apply(--layout-center-justified);*/
+      }
+    </style>
+    <div class="container">
+      <div>
+        <dashboard-admission-analysis-homecard></dashboard-admission-analysis-homecard>
+      </div>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'dashboard-homecard',
+      FnCallService:function(){
+
+      }
+    });
+  })();
+  </script>
+</dom-module>

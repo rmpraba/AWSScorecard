@@ -1,0 +1,20 @@
+branch-defaults:
+  default:
+    environment: reportcard-env
+    group_suffix: null
+  master:
+    environment: reportcard-env
+global:
+  application_name: REPORTCARD
+  branch: null
+  default_ec2_keyname: aws-eb
+  default_platform: Node.js
+  default_region: ap-south-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  repository: null
+  sc: null
+  workspace_type: Application
