@@ -503,9 +503,30 @@
       },
       fetchstudentResponse:function(e){ 
 
-        var arr=e.detail.response.returnval;      
+           var arr=e.detail.response.returnval;      
        // alert(JSON.stringify(arr));  
-       
+   var temp1=[] ;   
+   var temp=[];
+   temp.push({"serialno":"Sno","id":"Student Id","student_name":"Student Name","height":"Height","weight":"Weight","blood_group":"Blood Group","vision_left":"Vision Left","vision_right":"Vision Right","dental":"Dental Hygiene","font":"font-weight: bold;text-align:center;width:10% !important;","hidefist":true,"hidesecond":false});
+  
+        for(var i=0;i<arr.length;i++)
+        {
+          // for(var j=0;j<attendancearr.length;j++){
+            healtharr.push(arr[i]);
+          // }
+        }
+
+         for(var i=0;i<healtharr.length;i++)
+         {
+          
+          healtharr[i].serialno=parseInt(i)+1;
+          healtharr[i].font="font-weight:normal;text-align:center;width:10% !important;";
+          healtharr[i].hidefist=false;
+          healtharr[i].hidesecond=true;
+          temp.push(healtharr[i]);
+          temp1.push(healtharr[i]);
+         }
+
         for(var i=0;i<arr.length;i++)
         {
             healtharr.push(arr[i]);
@@ -516,16 +537,18 @@
 
           healtharr[i].serialno=parseInt(i)+1;
          }
+
          // alert(JSON.stringify(healtharr));
         if(localStorage.getItem("curr_sess_subject")=="Health"){
             //alert('d');
       if(localStorage.getItem("curr_sess_page")=='single-student-mark-entery-card')
         {
-        document.querySelector('single-student-mark-entery-card').studarres=healtharr;  
+     document.querySelector('single-student-mark-entery-card').studarres=temp;  
          }
         else{
-  document.querySelector('cce-fivetoten-health-card').studarr=healtharr;  
-        document.querySelector('cce-fivetoten-health-card').FnSpinnerrActive(false);
+   document.querySelector('cce-fivetoten-health-card').studarr=temp;  
+   document.querySelector('cce-fivetoten-health-card').studarr1=temp1;   
+   document.querySelector('cce-fivetoten-health-card').FnSpinnerrActive(false);
      
         }         
         } 
@@ -1357,7 +1380,10 @@ document.querySelector('subject-dynamic-coscholastic-markentry-cards').coarr=coa
       {
          var arr=e.detail.response.returnval;      
        // alert(JSON.stringify(arr));  
-       
+       var temp=[];
+       var temp1=[];
+   temp.push({"serialno":"Sno","id":"Student Id","student_name":"Student Name","attendance":"Total Attendance","generic":"Generic Comment","speccomment":"Specific Comment","font":"font-weight: bold;text-align:center;width:15% !important;","hidefist":true,"hidesecond":false});
+  
         for(var i=0;i<arr.length;i++)
         {
           // for(var j=0;j<attendancearr.length;j++){
@@ -1367,30 +1393,32 @@ document.querySelector('subject-dynamic-coscholastic-markentry-cards').coarr=coa
 
          for(var i=0;i<attendancearr.length;i++)
          {
-          attendancearr[i].serialno=parseInt(i)+1;
-         }
+          
+     attendancearr[i].serialno=parseInt(i)+1;
+       attendancearr[i].font="font-weight:normal;text-align:center;width:15% !important;";
+          attendancearr[i].hidefist=false;
+          attendancearr[i].hidesecond=true;
+          temp.push(attendancearr[i]);
+          temp1.push(attendancearr[i]);
 
-         // alert(attendancearr.length);
-           // document.querySelector('home-page').setPage('coscholasticassesmentsheet');
-           // document.querySelector('coscholastic-assesment-sheet-card').setPage('attendance-card'); 
-           // document.querySelector('attendance-card').setDefaultHeaders();
-            // alert(localStorage.getItem('curr_sess_report'));
-            
+         }
        if(localStorage.getItem('curr_sess_report')=='2') { 
-       if(localStorage.getItem("curr_sess_page")=='single-student-mark-entery-card')
-          document.querySelector('single-student-mark-entery-card').studarrss=attendancearr;
+      if(localStorage.getItem("curr_sess_page")=='single-student-mark-entery-card')
+          document.querySelector('single-student-mark-entery-card').studarrss=temp;
           document.querySelector('home-page').setPage('coscholasticassesment',''); 
           document.querySelector('coscholastic-assesment').hidedrop=true;
           document.querySelector('coscholastic-assesment').hiddenpage();
           document.querySelector('coscholastic-assesment-sheet-card').setPage('attendance-card'); 
           document.querySelector('attendance-card').setDefaultHeaders();
-          document.querySelector('attendance-card').studarr=attendancearr;
+          document.querySelector('attendance-card').studarr=temp;
+          document.querySelector('attendance-card').studarr1=temp1;
           document.querySelector('approve-one-to-four-card').FnSpinnerrActive(false);  
        } 
-       else{ 
-        if(localStorage.getItem("curr_sess_page")=='single-student-mark-entery-card')
-        document.querySelector('single-student-mark-entery-card').studarrss=attendancearr;
-        document.querySelector('attendance-card').studarr=attendancearr;
+      else{ 
+    if(localStorage.getItem("curr_sess_page")=='single-student-mark-entery-card')
+        document.querySelector('single-student-mark-entery-card').studarrss=temp;
+        document.querySelector('attendance-card').studarr=temp;
+        document.querySelector('attendance-card').studarr1=temp1;
         document.querySelector('attendance-card').FnSpinnerrActive(false);
         }
         attendancearr=[];

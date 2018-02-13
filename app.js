@@ -4,18 +4,18 @@ var email   = require("emailjs/email");
 var htmlToPdf = require('html-to-pdf');
 var fs = require('fs');
 var connection = mysql.createConnection({
-  host:"smis.cpldg3whrhyv.ap-south-1.rds.amazonaws.com",
+ /* host:"smis.cpldg3whrhyv.ap-south-1.rds.amazonaws.com",
   database:"scorecarddb",
   port:'3306',
   user:"smis",
   password:"smispass",
   reconnect:true,
   data_source_provider:"rds",
-  type:"mysql"
-  // host     : 'localhost',
-  // user     : 'root',
-  // password : 'admin',
-  // database : 'mlzsreportcard'
+  type:"mysql"*/
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'scorecardtemp'
  });
 var bodyParser = require('body-parser'); 
 var app = express();
@@ -5047,40 +5047,6 @@ app.post('/fetchhealthattendanceinfo-service',  urlencodedParser,function (req,r
   });
 });
 
-/*app.post('/undotudentverifyvalues1-service' ,  urlencodedParser,function (req, res)
-{  
-   
-var qur="DELETE FROM  tr_student_varified_table where school_id='"+req.query.schoolid+"' and "+
-    "grade_name='"+req.query.grade+"' and section_name='"+req.query.section+"' and academic_year='"+req.query.academicyear+"' "+
-    " and term_id='"+req.query.termname+"' and student_id='"+req.query.studentid+"'";
-//console.log(qur);
-  connection.query(qur,
-    function(err, rows)
-    {
-    if(!err)
-    {
-      res.status(200).json({'returnval': 'Deleted!'});
-    }
-    else
-    {
-      //console.log(err);
-      res.status(200).json({'returnval': 'Not Deleted!'});
-    }
-    });
-    
-});
-
-
-
-
-
-*/
-
-
-
-
-
-//fetchcoscholasticinfo
 app.post('/fetchcoscholasticmetrics-service',  urlencodedParser,function (req,res)
 {   
   var schoolid={school_id:req.query.schoolid};
@@ -5104,7 +5070,7 @@ app.post('/fetchcoscholasticmetrics-service',  urlencodedParser,function (req,re
 });
 });
 
-//fetch the name for performance report
+
 
 app.post('/nameforonetofourreport-service',  urlencodedParser,function (req,res)
 {   
