@@ -210,7 +210,8 @@
       document.querySelector('#scorecardsection').selected=-1;
      },
      FnSelectacademicyear1:function(e){  
-        document.querySelector('#scorecardterm').selected=-1;
+      document.querySelector('#scorecardsearchrterm').selected=-1;
+        this.termarr1="";
         academicarr2 = e.target.selectedItem.value.trim();
         localStorage.setItem("curr_sess_academicyear",academicarr2); 
         this.$.scorecardservice.FnFetchStudentTermService(academicarr2,this.studentid);

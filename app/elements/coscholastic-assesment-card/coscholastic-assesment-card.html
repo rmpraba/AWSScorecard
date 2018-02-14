@@ -18,15 +18,12 @@
     
     .card{
         @apply(--layout-vertical);
-    }
-
-    .drop{        
+     }
+   .drop{        
         @apply(--layout-horizontal);
         @apply(--layout-center-justified);
-        /*margin-top: 5%;*/
-        /*margin-left: 5%;*/
         border-bottom: 1px solid #dedede; 
-    }
+      }
     paper-dropdown-menu{
       width: 15%;
       margin-left: 3%;
@@ -34,7 +31,7 @@
     paper-dropdown-menu{
       width: 15%;
       margin-left: 3%;
-      --paper-input-container-label: { color: red };
+      --paper-input-container-label:{ color: red };
       text-align:center;
     }
     .spinner{
@@ -147,8 +144,7 @@
         section = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_section",section);
         this.$.termassesmentservice.callSubjectService(gradename,section);       
-        if(this.flag==1)
-          this.callService();
+       
         if(localStorage.getItem("curr_sess_page")=="dynamic-coscholastic-markentry-card")
         document.querySelector('dynamic-coscholastic-markentry-card').hideheader=true;
         if(localStorage.getItem("curr_sess_page")=="subject-dynamic-coscholastic-markentry-card")

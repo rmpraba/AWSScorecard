@@ -179,12 +179,14 @@
         obj.section=localStorage.getItem("curr_sess_section");
         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+        obj.role=sessionStorage.getItem("curr_sess_loggedrole");
         obj.studid=studid;
         this.fetchstudinfoparam=obj;
         this.$.fetchstudinfoajax.generateRequest();
       },
       fetchstudinfoResponse:function(e){        
-        var arr=e.detail.response.returnval;
+        var arr=e.detail.response.returnval;  
+        var arr1=e.detail.response.emparr;
         // alert(JSON.stringify(arr));       
         if(localStorage.getItem("curr_sess_grade")=="Grade-1"||localStorage.getItem("curr_sess_grade")=="Grade-2"||localStorage.getItem("curr_sess_grade")=="Grade-3"||localStorage.getItem("curr_sess_grade")=="Grade-4"){
         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Scorecard"){          
@@ -193,6 +195,7 @@
         document.querySelector('cce-onetofour-score-card').parentname=arr[0].parent_name;
         document.querySelector('cce-onetofour-score-card').parentemail=arr[0].email;
        document.querySelector('cce-onetofour-score-card').secemail=arr[0].alternate_mail;
+       document.querySelector('cce-onetofour-score-card').empsign=arr1[0].id+arr1[0].school_id+".jpg";
         }
         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Comparisonreport"){
         document.querySelector('comparisonreport-card').enrno=arr[0].student_id;

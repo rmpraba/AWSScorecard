@@ -240,8 +240,8 @@ table{
 
 <br><br><br><br><br><br><br>
 
-  <table  class="signature">
-    <tr><th><img id='img1' width="100px;height:10px;"></th><th></th><th></th><th><img id='img2' width="100px;height:10px;"></th><th></th><th></th><th></th></tr>
+  <table  class="signature">  
+    <tr><th><img id='img1' src="../../images/{{empsign}}"  width="100px;height:10px;"></th><th></th><th></th><th><img id='img2' width="100px;height:10px;"></th><th></th><th></th><th></th></tr>
     <tr><th>---------------------------------</th><th></th><th></th><th>---------------------------------</th><th></th><th></th>
     <th>----------------------------------</th><th></th><th></th></tr>
     <tr><th>Class Teacher</th><th></th><th></th><th>Principal</th><th></th><th></th><th>Parent</th><th></th><th></th></tr>
@@ -440,10 +440,10 @@ table{
         
       },
       callImage:function(){
-        document.querySelector('#img1').src="../../images/"+sessionStorage.getItem("curr_sess_loggedid").toUpperCase()+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
+       
          if(sessionStorage.getItem("curr_sess_loggedschoolid")=="SCH003")
           document.querySelector('#img2').src="../../images/principal"+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
-        else
+          else
         document.querySelector('#img2').src="../../images/principal"+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
          this.schoolname=sessionStorage.getItem("curr_sess_loggedschoolname");
         this.schooladdress=sessionStorage.getItem("curr_sess_loggedschooladdress");

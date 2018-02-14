@@ -300,7 +300,7 @@ var tab_text = '<table border="1px" style="font-size:20px" ">';
                      // temp=[];
                       array=[];
                       array1=[];
-                      tempstudentarr=[];
+                     // tempstudentarr=[];
                       setarr=[];
                      // alert("Pls import the corrcet file name");
                      document.getElementById("readfiles").value = "";
@@ -311,7 +311,7 @@ var tab_text = '<table border="1px" style="font-size:20px" ">';
       else{
       document.querySelector("coscholastic-assesment-card").FnToggleSpinner(true);
       document.querySelector("coscholastic-assesment-card").spinnermsg='Please wait...uploading';
-      }
+      
 
      //  alert(JSON.stringify(temp));
     
@@ -364,6 +364,7 @@ var a = (temp[i].weight).split(",");
             tempstudentarr=[];
           document.getElementById("readfiles").value ="";
            this.categorylength="";
+       }
        }
       }, 
       excelmark:function(e){

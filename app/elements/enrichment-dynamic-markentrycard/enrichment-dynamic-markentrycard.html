@@ -292,11 +292,17 @@
                       temp=[];
                       array=[];
                       array1=[];
-                      tempstudentarr=[];
+                    //  tempstudentarr=[];
                      alert("Pls import the corrcet file name");
                      document.getElementById("enrichreadfile").value = "";
                      }}}}}
-           document.querySelector("beginner-assesment-card").FnToggleSpinner(true);
+
+
+ if(temp.length==0){
+      alert("Please check your sheet..All the fields must be entered!!");
+      }
+      else{
+document.querySelector("beginner-assesment-card").FnToggleSpinner(true);
            document.querySelector("beginner-assesment-card").spinnermsg="Please wait...Loading";
            this.$.beginnerservice.callbamarkinsertService(temp);
            temp=[];
@@ -306,6 +312,11 @@
 
            document.getElementById("enrichreadfile").value = "";
          this.categorylength="";
+      
+        
+      }
+
+           
        }
       },
       FnSetGrade:function(arr,detail){

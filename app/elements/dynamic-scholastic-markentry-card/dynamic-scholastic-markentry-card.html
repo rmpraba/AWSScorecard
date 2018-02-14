@@ -75,7 +75,7 @@
       <div class="excelcard" align="right">
       <div id="check" hidden$="{{hideheader}}">
       <paper-checkbox id="templatecheckvalueid1" on-change="excelmark">Excel Upload</paper-checkbox>
-      </div>
+     
       <div id="hiddenexcelheaderfiles">
       <div class="hrspace">
       <paper-icon-button id="download" icon="icons:file-download" onclick="exportToExcel3()"></paper-icon-button>
@@ -90,6 +90,7 @@
         <paper-icon-button  id="upload" icon="icons:file-upload" on-click="FnClick"></paper-icon-button>
         <paper-tooltip for="upload">Upload</paper-tooltip>
         <!-- <paper-button style="color: white;height: 25px;  background: #252626; font-family:Calibri;"  on-click="FnClick">Upload File</paper-button>     -->
+       </div>
        </div>
        </div>
        </div>
@@ -310,7 +311,7 @@ var tab_text = '<table border="1px" style="font-size:20px" ">';
                      // temp=[];
                       array=[];
                       array1=[];
-                      tempstudentarr=[];
+                   //   tempstudentarr=[];
                       setarr=[];
                      // alert("Pls import the correct file name");
                      document.getElementById("readfile").value = "";
@@ -321,7 +322,7 @@ var tab_text = '<table border="1px" style="font-size:20px" ">';
   else{
   document.querySelector("term-assesment-card").FnToggleSpinner(true);
   document.querySelector("term-assesment-card").spinnermsg="Please wait...uploading"
-  }
+ 
       for(var i=0;i<temp.length;i++){
     this.$.assesmentservice.callinsertassesmentmarkService(temp[i].studentid,temp[i].studentname,temp[i].categoryname,temp[i].subcategoryname,temp[i].value,temp[i].seq,temp.length);     
       }
@@ -332,6 +333,7 @@ var tab_text = '<table border="1px" style="font-size:20px" ">';
             tempstudentarr=[];
             document.getElementById("readfile").value ="";
            this.categorylength="";
+         }
        }
       },
       FnSetLabel:function(){

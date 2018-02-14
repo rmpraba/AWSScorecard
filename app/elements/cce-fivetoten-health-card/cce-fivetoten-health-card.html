@@ -354,12 +354,12 @@ var tab_text = '<table border="1px" style="font-size:20px" ">';
           obj.DentalHygiene=array[i].DentalHygiene; 
           }
            temp.push(obj);
-        //  alert(JSON.stringify(temp));
+       
              }}}
-   this.FnSpinnerrActive(true);
-   this.spinnermsg="Please wait...uploading";
-   localStorage.setItem("curr_sess_lenth",temp.length);
-    for(var i=0;i<temp.length;i++){
+    this.FnSpinnerrActive(true);
+    this.spinnermsg="Please wait...uploading";
+    localStorage.setItem("curr_sess_lenth",temp.length);
+     for(var i=0;i<temp.length;i++){
 
     this.$.coscholasticservice.callinserthealthService(temp[i].studentid,temp[i].studentname,temp[i].Height,temp[i].Weight,temp[i].BloodGroup,temp[i].VisionLeft,temp[i].VisionRight,temp[i].DentalHygiene);     
       }
