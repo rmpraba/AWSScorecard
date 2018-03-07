@@ -141,7 +141,7 @@
               </tr>
             </table>
           </td>
-        </tr>
+        </tr> 
 
         <tr>
           <td>
@@ -182,7 +182,14 @@
                  <paper-item value="2language">Second Language </paper-item>
                  <paper-item value="3language">Third Language</paper-item>
             </paper-menu>
-       </paper-dropdown-menu>
+          </paper-dropdown-menu>
+          <paper-dropdown-menu label="Select The Type ">
+            <paper-menu id="langtypeid" class="dropdown-content" on-iron-select="Fnselecttype" attr-for-selected="value" required>
+                 <paper-item value="once">Once</paper-item>
+                 <paper-item value="each">Each</paper-item>
+                 
+            </paper-menu>
+         </paper-dropdown-menu>
                 </div>   
         <div class="buttons">
               <paper-button class="popup-btn" on-click="FnSubmit">Submit</paper-button>
@@ -218,6 +225,7 @@
        document.querySelector('#category').selected=-1;
        this.subjectname="";
        document.querySelector('#Languageprefernceid').selected=-1;
+       document.querySelector('#langtypeid').selected=-1;
      
        //this.subjectid="";                  
       }, 
@@ -246,21 +254,23 @@
         {
          //alert(category+this.preflang);
 
-         this.$.uiservice.FnSetSubjectInfo(this.subjectid,subname,category,this.preflang);
+         this.$.uiservice.FnSetSubjectInfo(this.subjectid,subname,category,this.preflang,this.type);
          document.querySelector('subject-card').FnRefresh();
           this.$.Languageprefernce.hidden=true;  
          document.querySelector('#Languageprefernceid').selected=-1;
-      
+        
        }
         else
        {
        // alert(this.subjectid);
-         this.$.uiservice.FnSetSubjectInfo(this.subjectid,subname,category);
+         this.$.uiservice.FnSetSubjectInfo(this.subjectid,subname,category,"",this.type);
          document.querySelector('subject-card').FnRefresh();
           this.$.Languageprefernce.hidden=true;  
          document.querySelector('#Languageprefernceid').selected=-1;   
       }
       this.$.mydialog.toggleDialog();
+         document.querySelector('#langtypeid').selected=-1;   
+
   
     },
      toTitleCase:function(str)
@@ -273,6 +283,12 @@
       this.preflang=e.target.selectedItem.textContent.trim(); 
        //alert(this.preflang);        
       },
+    Fnselecttype:function(e)
+      {
+      this.type=e.target.selectedItem.textContent.trim(); 
+       //alert(this.preflang);        
+      },
+        
       FnSelectCategoryzzz:function(e)
       {      category=e.target.selectedItem.value;
              this.$.Languageprefernce.hidden=true;    
