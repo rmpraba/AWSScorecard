@@ -109,7 +109,7 @@
     <subject-dynamic-service id="subjectservice"></subject-dynamic-service>
     <dynamic-scholastic-subject-service id="scholasticsubjectservice"></dynamic-scholastic-subject-service>
 
-  </template>
+  </template>  
   <script>
   (function() {
     // var flag=0;
@@ -186,7 +186,10 @@
  if(localStorage.getItem("curr_sess_page")=="dynamic-scholastic-markentry-card")
    document.querySelector('dynamic-scholastic-markentry-card').hideheader=true;
     
-     },      
+     }, 
+     fnsubjectinfo:function(arr) {
+      this.subjectinfo=arr;
+     } ,   
       FnSelectSubject:function(e){
         this.flag=1;
         var sname = e.target.selectedItem.value; 
@@ -197,18 +200,26 @@
         subjectid=sname.substring((inx+2));
         else
         subjectid=sname;
-      //  alert("pref:"+pref);
-     //   alert("name:"+subjectid);
+        // alert("pref:"+pref);
+        //  alert("name:"+subjectid);
         subject = e.target.selectedItem.textContent.trim(); 
         localStorage.setItem("curr_sess_subject",subject);
         localStorage.setItem("curr_sess_subjectid",subjectid);
         localStorage.setItem("curr_sess_languagepref",pref);
-       // alert(localStorage.getItem("curr_sess_subjectid"));
+       for(var i=0;i<this.subjectinfo.length;i++)
+       {
+         if(subjectid==this.subjectinfo[i].subject_id)
+          {
+             this.type=this.subjectinfo[i].type;   
+          } 
+        }
+       localStorage.setItem("curr_sess_type",this.type);
+        alert(this.type);
         this.callService(); 
-  if(localStorage.getItem("curr_sess_page")=="subject-dynamic-markentrycard")
-   document.querySelector('subject-dynamic-markentrycard').hideheader=true;
+      if(localStorage.getItem("curr_sess_page")=="subject-dynamic-markentrycard")
+       document.querySelector('subject-dynamic-markentrycard').hideheader=true;
     if(localStorage.getItem("curr_sess_page")=="dynamic-scholastic-markentry-card")
-   document.querySelector('dynamic-scholastic-markentry-card').hideheader=true;
+     document.querySelector('dynamic-scholastic-markentry-card').hideheader=true;
           
       },
    FnSelectAssesment:function(e){
@@ -247,9 +258,9 @@
           this.spinnermsg="Please wait...Loading";
           if(localStorage.getItem('curr_sess_report')=='0'){
           document.querySelector('term-assesment-sheet-card').setPage('dynamic-scholastic-markentry-card');
-          document.querySelector('dynamic-scholastic-markentry-card').FnRefresh();
+        document.querySelector('dynamic-scholastic-markentry-card').FnRefresh();
           this.$.scholasticsubjectservice.subjectsubmittedcheckService(gradename,section,subject);
-     //this.$.scholasticsubjectservice.templateincoscolasticsubject(gradename,section,subject);
+      
           }
           if(localStorage.getItem('curr_sess_report')=='1'){
             // alert('in');
@@ -257,49 +268,7 @@
           document.querySelector('dynamic-scholastic-markentry-report').FnRefresh();
           this.$.scholasticsubjectservice.callFetchStudentInfo1(gradename,section,subject);
           }
-        // if(subject=="Mathematics")
-        // {
-        // // alert('yes');  
-        // document.querySelector('cc-maths-onetofour-card').studarr=[];     
-        // this.$.assesmentservice.callFetchStudentInfo(gradename,section);             
-        //    document.querySelector('term-assesment-sheet-card').setPage('cc-maths-onetofour-card');
-        //    document.querySelector('cc-maths-onetofour-card').setDefaultHeaders();
-        //    document.querySelector('cc-maths-onetofour-card').FnSpinnerrActive(true); 
-        // }  
-        // if(subject=="EVS")
-        // { 
-        //   document.querySelector('cc-evs-onetofour-card').studarr=[];       
-        //   this.$.assesmentservice.callFetchStudentInfo(gradename,section);          
-        //   document.querySelector('term-assesment-sheet-card').setPage('cc-evs-onetofour-card');
-        //   document.querySelector('cc-evs-onetofour-card').setDefaultHeaders();
-        //   document.querySelector('cc-evs-onetofour-card').FnSpinnerrActive(true); 
-          
-        // }
-        //  if(subject=="English"||subject=="II Language Hindi"||subject=="II Language Kannada")
-        //  { 
-        //   document.querySelector('cc-eng-onetofour-card').studarr=[];     
-        //   this.$.assesmentservice.callFetchStudentInfo(gradename,section);          
-        //   document.querySelector('term-assesment-sheet-card').setPage('cc-eng-onetofour-card');
-        //   document.querySelector('cc-eng-onetofour-card').setDefaultHeaders();
-        //   document.querySelector('cc-eng-onetofour-card').FnSpinnerrActive(true); 
-        // }
-        // if(subject=="GK")
-        // {   
-        //   document.querySelector('cc-gk-onetofour-card').studarr=[];     
-        //   this.$.assesmentservice.callFetchStudentInfo(gradename,section);          
-        //   document.querySelector('term-assesment-sheet-card').setPage('cc-gk-onetofour-card');
-        //   document.querySelector('cc-gk-onetofour-card').setDefaultHeaders();
-        //   document.querySelector('cc-gk-onetofour-card').FnSpinnerrActive(true); 
-          
-        // }       
-        // if(subject=="Computer")
-        // {  
-        //   document.querySelector('cc-computer-onetofour-card').studarr=[];      
-        //   this.$.assesmentservice.callFetchStudentInfo(gradename,section);          
-        //   document.querySelector('term-assesment-sheet-card').setPage('cc-computer-onetofour-card');
-        //   document.querySelector('cc-computer-onetofour-card').setDefaultHeaders();
-        //   document.querySelector('cc-computer-onetofour-card').FnSpinnerrActive(true); 
-        // }        
+      
         }
         else if(gradename!="Grade-1"||gradename!="Grade-2"||gradename!="Grade-3"||gradename!="Grade-4")
         {

@@ -13,16 +13,7 @@
         on-response="academicResponse"
         debounce-duration="300"
     >
-  <iron-ajax  
-        method="post"
-        id="assesmentajax"
-        url="{{assesmenturl}}"
-        params="{{assesmentparam}}"
-        handle-as="json"
-        content-type="application/json"
-        on-response="assesmentResponse"
-        debounce-duration="300"
-    >
+  
   <iron-ajax
         method="post"
         id="termajax"
@@ -588,7 +579,17 @@
         content-type="application/json"
         on-response="reversalupdateimportResponse"
         debounce-duration="300"
-      >
+      ></iron-ajax>
+       <iron-ajax
+        method="post"
+        id="finalvalueofGenerateajax"
+        url="{{finalvalueofGenerateurl}}"
+        params="{{finalvalueofGenerateparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="finalvalueofGenerateResponse"
+        debounce-duration="300"
+      ></iron-ajax>
 
     
   </template>
@@ -812,10 +813,12 @@
                 arr[i].subject_id=arr[i].language_pref+"  "+arr[i].subject_id;
             }
           }
-         // alert(JSON.stringify(arr));
+       //  alert(JSON.stringify(arr));
           document.querySelector('term-assesment-card').subjectarr=arr;
+          document.querySelector('term-assesment-card').fnsubjectinfo(arr);
           // if(localStorage.getItem("curr_sess_subjectcategory")=="category2"||localStorage.getItem("curr_sess_subjectcategory")=="category3"||localStorage.getItem("curr_sess_subjectcategory")=="category4")  
           document.querySelector('coscholastic-assesment-card').subjectarr=arr;  
+        document.querySelector('coscholastic-assesment-card').fnsubjectinfo(arr);
       },
       callAssesmentService:function(gradename){
          this.assesmenturl=sessionStorage.getItem("addrinfo")+"/assesment-service";
@@ -824,8 +827,7 @@
          obj.academicyear=localStorage.getItem("curr_sess_academicyear");
          obj.termname=localStorage.getItem("curr_sess_termname");
          obj.gradename=gradename;
-         // obj.termtype=termtype;
-         // obj.termname=termname;         
+                  
          this.assesmentparam= obj;
          this.$.assesmentajax.generateRequest();
       },
@@ -1743,8 +1745,8 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
      {
       if(e.detail.response.returnval=='exist'){        
         // alert('Assesment already approved!');
-        document.querySelector('term-assesment-card').TermMarkdialog("Assesment already approved!"); 
-        document.querySelector("term-assesment-card").FnToggleSpinner(false);
+     document.querySelector('term-assesment-card').TermMarkdialog("Assesment already approved!"); 
+    document.querySelector("term-assesment-card").FnToggleSpinner(false);
       }
       else if(e.detail.response.returnval=='not exist'){        
         // alert('Please approve the previous assesment of this term!');
@@ -1881,18 +1883,15 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
       
     },
     updateflagResponse:function(e){
-      // alert("update flag"+e.detail.response.returnval);
-      // alert(localStorage.getItem("curr_sess_subjectcategory"));
+     
       if(e.detail.response.returnval=='exist'){
-        // alert("Already Approved!");
-        // document.querySelector('approve-one-to-four-card').FnSpinnerrActive(false);
-        if(localStorage.getItem("curr_sess_subjectcategory")=="category2" || localStorage.getItem("curr_sess_subjectcategory")=="category3"|| localStorage.getItem("curr_sess_subjectcategory")=="category4"){
-        document.querySelector('coscholastic-assesment-card').TermMarkdialog("Already Approved!");
-        document.querySelector("coscholastic-assesment-card").FnToggleSpinner(false);
+         if(localStorage.getItem("curr_sess_subjectcategory")=="category2" || localStorage.getItem("curr_sess_subjectcategory")=="category3"|| localStorage.getItem("curr_sess_subjectcategory")=="category4"){
+document.querySelector('coscholastic-assesment-card').TermMarkdialog("Already Approved!");
+document.querySelector("coscholastic-assesment-card").FnToggleSpinner(false);
         }
         else{
-        document.querySelector('term-assesment-card').TermMarkdialog("Already Approved!");
-        document.querySelector("term-assesment-card").FnToggleSpinner(false);
+document.querySelector('term-assesment-card').TermMarkdialog("Already Approved!");
+document.querySelector("term-assesment-card").FnToggleSpinner(false);
         }
       }
     
@@ -2102,17 +2101,15 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
          this.$.overalltermmarkinsertajax.generateRequest();
       },
       overalltermmarkinsertResponse:function(e){        
-      // alert("Inserted!");
+     alert("Inserted!");
       // alert("overall..."+e.detail.response.returnval);
         if(e.detail.response.returnval=="succ")
         {
         if(sessionStorage.getItem("curr_sess_loggedrole")=="Co-Ordinator"){
-        //  alert("eee");
-        // alert('Approved!'+localStorage.getItem("curr_sess_assesment")+localStorage.getItem("curr_sess_subjectcategory")); 
-        // document.querySelector('approve-one-to-four-card').FnSpinnerrActive(false);
+      
         if(localStorage.getItem("curr_sess_assesment")!="Assesment3"){
-        // alert('in'+document.querySelector('term-assesment-card'));
-        if(localStorage.getItem("curr_sess_subjectcategory")=="category2" || localStorage.getItem("curr_sess_subjectcategory")=="category3"|| localStorage.getItem("curr_sess_subjectcategory")=="category4"){
+       
+         if(localStorage.getItem("curr_sess_subjectcategory")=="category2" || localStorage.getItem("curr_sess_subjectcategory")=="category3"|| localStorage.getItem("curr_sess_subjectcategory")=="category4"){
         document.querySelector('coscholastic-assesment-card').TermMarkdialog("Approved!");
         document.querySelector("coscholastic-assesment-card").FnToggleSpinner(false);
         }
@@ -2123,12 +2120,20 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
         }
         }
         else{
+
         if(localStorage.getItem("curr_sess_assesment")!="Assesment3")
         document.querySelector('single-student-mark-entery-card').FnUpdateApprovalStatus();
         }
-        }         
-        if(localStorage.getItem("curr_sess_assesment")=="Assesment3"||localStorage.getItem("curr_sess_subject")=="Art&Craft"||localStorage.getItem("curr_sess_subject")=="dance"||localStorage.getItem("curr_sess_subject")=="music"||localStorage.getItem("curr_sess_subject")=="Games"||localStorage.getItem("curr_sess_subject")=="Personality Development")
-          this.calloveralltermassesmentinsertService();
+        } 
+
+      if(localStorage.getItem("curr_sess_type")=="Each"){
+         this.FnfinalvalueofGenerate();
+      }
+     else if(localStorage.getItem("curr_sess_type")=="Once"){
+         this.calloveralltermassesmentinsertService();
+
+     }
+        
         else{
         if(sessionStorage.getItem("curr_sess_loggedrole")=="Co-Ordinator"){
           if(localStorage.getItem("curr_sess_filterid")=="fillteractive"){
@@ -2137,15 +2142,15 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
        else{
         this.callApproveService();   
         }
-         // document.querySelector('home-page').setPage('approveassesment',''); 
-         // document.querySelector('approve-one-to-four-card').FnSpinnerrActive(false); 
-         // document.querySelector('approve-one-to-four-card').setDefaultHeaders();
+        // document.querySelector('home-page').setPage('approveassesment',''); 
+        // document.querySelector('approve-one-to-four-card').FnSpinnerrActive(false); 
+      // document.querySelector('approve-one-to-four-card').setDefaultHeaders();
          }
         }
        },
       calloveralltermassesmentinsertService:function()
-      {
-         this.overalltermassesmentinserturl=sessionStorage.getItem("addrinfo")+"/overalltermassesmentinsert-service";
+       {
+      this.overalltermassesmentinserturl=sessionStorage.getItem("addrinfo")+"/overalltermassesmentinsert-service";
          var obj={"schoolid":"","academicyear":"","assesmentid":"","termname":"","studentid":"","studentname":"","subject":"","type":"","category":"","total":"","rtotal":"","grade":""};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.academicyear=localStorage.getItem("curr_sess_academicyear");         
@@ -2158,13 +2163,38 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
          this.overalltermassesmentinsertparam= obj;
          this.$.overalltermassesmentinsertajax.generateRequest();
       },
+
+      FnfinalvalueofGenerate:function()
+       {
+      this.finalvalueofGenerateurl=sessionStorage.getItem("addrinfo")+"/finalvalueofGenerate-service";
+     var obj={"schoolid":"","academicyear":"","assesmentid":"","termname":"","studentid":"","studentname":"","subject":"","type":"","category":"","total":"","rtotal":"","grade":""};
+         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");         
+         obj.termname=localStorage.getItem("curr_sess_termname");
+         obj.grade=localStorage.getItem("curr_sess_grade");
+         obj.section=localStorage.getItem("curr_sess_section");                
+         obj.subject=localStorage.getItem("curr_sess_subject");    
+         obj.role=sessionStorage.getItem("curr_sess_loggedrole");
+         obj.studentid=localStorage.getItem("curr_sess_studentid"); 
+         this.finalvalueofGenerateparam=obj;
+         this.$.finalvalueofGenerateajax.generateRequest();
+      },
+finalvalueofGenerateResponse:function(e){  
+  // alert(e.detail.response.returnval);
+     var res=e.detail.response.returnval;
+      // alert(JSON.stringify(res));
+    //alert(res[0].assesmentname+"  "+localStorage.getItem("curr_sess_assesment"));
+       if(res[0].assesmentname==localStorage.getItem("curr_sess_assesment"))
+        this.calloveralltermassesmentinsertService();
+       
+  },
       overalltermassesmentinsertResponse:function(e){    
         // alert(e.detail.response.returnval);
         if(e.detail.response.returnval=="succ")
          {
           if(sessionStorage.getItem("curr_sess_loggedrole")=="Co-Ordinator"){
          // alert("All assesments are approved in this term!"+localStorage.getItem("curr_sess_subjectcategory"));
-         // document.querySelector('approve-one-to-four-card').FnSpinnerrActive(false);
+         // document.querySelector('approve-on` e-to-four-card').FnSpinnerrActive(false);
          if(localStorage.getItem("curr_sess_subjectcategory")=="category2" || localStorage.getItem("curr_sess_subjectcategory")=="category3"|| localStorage.getItem("curr_sess_subjectcategory")=="category4"){
         document.querySelector('coscholastic-assesment-card').TermMarkdialog("All the assesments are approved in this term!");
         document.querySelector("coscholastic-assesment-card").FnToggleSpinner(false);
